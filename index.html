@@ -222,6 +222,52 @@
             margin-top: 10px;
         }
 
+        .consultas-field {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .consultas-field.active {
+            display: block;
+        }
+
+        .consultas-field label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            opacity: 0.9;
+        }
+
+        .area-card.selected .consultas-field label {
+            color: white;
+        }
+
+        .consultas-field input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid rgba(74, 30, 167, 0.3);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #4A1EA7;
+        }
+
+        .area-card.selected .consultas-field input {
+            background: white;
+            border-color: white;
+        }
+
+        .consultas-field input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 30, 167, 0.2);
+        }
+
+        .area-card.selected .consultas-field input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
         .consultas-input {
             display: none;
         }
@@ -245,11 +291,21 @@
             margin-top: 20px;
         }
 
+        @media (max-width: 768px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .result-item {
             background: rgba(255, 255, 255, 0.15);
             padding: 20px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .result-label {
@@ -262,10 +318,24 @@
         .result-value {
             font-size: 1.8rem;
             font-weight: 700;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.2;
         }
 
         .result-value.large {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
+        }
+
+        /* Ajuste responsivo para valores grandes */
+        @media (max-width: 1024px) {
+            .result-value {
+                font-size: 1.5rem;
+            }
+            
+            .result-value.large {
+                font-size: 1.8rem;
+            }
         }
 
         .breakdown {
@@ -327,11 +397,11 @@
 
         <div class="main-card">
             <div class="info-box">
-                <strong>💡 Modelo B2B:</strong> Essa calculadora foi pensada para um modelo B2B, no qual empresas pagam pelo total da base de colaboradores, mas apenas uma porcentagem (sinistralidade) utiliza efetivamente os serviços. O valor é calculado considerando uso real + margem de lucro desejada. Caso vá ser usada para uma lógica B2C, a sinistralidade precisa estar em 100% obrigatoriamente.
+                <strong>❗ Observaçoes:</strong> Essa calculadora foi pensada para um formato B2B, no qual empresas pagam pelo total da base de colaboradores, mas apenas uma porcentagem (sinistralidade) utiliza efetivamente os serviços. O valor é calculado considerando uso real + margem de lucro desejada em lógica PRESUMIDA (bruto). Para margem de lucro em lógica REAL (líquido), é necessário verificar as alíquota atuais com o Adalberto ou Janaina.
             </div>
 
             <!-- Modo de Cálculo -->
-            <div class="section-title">Modo de Cálculo</div>
+            <div class="section-title">Modo de cálculo</div>
             <div class="toggle-mode">
                 <div class="toggle-buttons">
                     <button class="toggle-btn active" onclick="setMode('sinistralidade')">
@@ -344,41 +414,41 @@
             </div>
 
             <!-- Parâmetros Gerais -->
-            <div class="section-title">Parâmetros Gerais</div>
+            <div class="section-title">Parâmetros gerais</div>
             <div class="input-section">
                 <div class="input-group" id="sinistralidade-inputs">
                     <div class="input-field">
-                        <label>Base Total de Usuários</label>
+                        <label>Base total de usuários</label>
                         <input type="number" id="base-total" value="1000" min="1" oninput="calcular()">
                     </div>
                     <div class="input-field">
-                        <label>Sinistralidade Prevista (%)</label>
+                        <label>Sinistralidade prevista (%)</label>
                         <input type="number" id="sinistralidade" value="10" min="0" max="100" step="0.1" oninput="calcular()">
                     </div>
                     <div class="input-field">
-                        <label>Lucro Presumido (%)</label>
+                        <label>Lucro presumido (%)</label>
                         <input type="number" id="lucro" value="20" min="0" step="0.1" oninput="calcular()">
                     </div>
                 </div>
 
                 <div class="input-group consultas-input" id="consultas-inputs">
                     <div class="input-field">
-                        <label>Base Total de Usuários</label>
+                        <label>Base total de usuários</label>
                         <input type="number" id="base-total-consultas" value="1000" min="1" oninput="calcular()">
                     </div>
                     <div class="input-field">
-                        <label>Número Total de Consultas Mensais</label>
-                        <input type="number" id="num-consultas" value="100" min="0" oninput="calcular()">
-                    </div>
-                    <div class="input-field">
-                        <label>Lucro Presumido (%)</label>
+                        <label>Lucro presumido (%)</label>
                         <input type="number" id="lucro-consultas" value="20" min="0" step="0.1" oninput="calcular()">
                     </div>
+                </div>
+
+                <div class="info-box consultas-input" id="consultas-info" style="display: none;">
+                    <strong>Modo por consultas mensais:</strong> Defina o número esperado de consultas mensais para cada serviço selecionado diretamente nos cards abaixo.
                 </div>
             </div>
 
             <!-- Seleção de Áreas -->
-            <div class="section-title">Selecione os Serviços</div>
+            <div class="section-title">Selecione os serviços</div>
             <div class="areas-grid">
                 <div class="area-card" onclick="toggleArea('psicologia')">
                     <div class="area-header">
@@ -390,6 +460,10 @@
                         • Valor/hora: R$ 30,00
                     </div>
                     <div class="area-price">R$ 15,00/consulta</div>
+                    <div class="consultas-field" id="consultas-psicologia">
+                        <label>Consultas mensais esperadas</label>
+                        <input type="number" value="0" min="0" onclick="event.stopPropagation()" oninput="calcular()">
+                    </div>
                 </div>
 
                 <div class="area-card" onclick="toggleArea('educacao')">
@@ -402,6 +476,10 @@
                         • Valor/hora: R$ 30,00
                     </div>
                     <div class="area-price">R$ 10,00/consulta</div>
+                    <div class="consultas-field" id="consultas-educacao">
+                        <label>Consultas mensais esperadas</label>
+                        <input type="number" value="0" min="0" onclick="event.stopPropagation()" oninput="calcular()">
+                    </div>
                 </div>
 
                 <div class="area-card" onclick="toggleArea('nutricao')">
@@ -414,6 +492,10 @@
                         • Valor/hora: R$ 30,00
                     </div>
                     <div class="area-price">R$ 15,00/consulta</div>
+                    <div class="consultas-field" id="consultas-nutricao">
+                        <label>Consultas mensais esperadas</label>
+                        <input type="number" value="0" min="0" onclick="event.stopPropagation()" oninput="calcular()">
+                    </div>
                 </div>
 
                 <div class="area-card" onclick="toggleArea('dermatologia')">
@@ -426,6 +508,10 @@
                         • Valor/hora: R$ 115,00
                     </div>
                     <div class="area-price">R$ 19,16/consulta</div>
+                    <div class="consultas-field" id="consultas-dermatologia">
+                        <label>Consultas mensais esperadas</label>
+                        <input type="number" value="0" min="0" onclick="event.stopPropagation()" oninput="calcular()">
+                    </div>
                 </div>
             </div>
 
@@ -437,28 +523,28 @@
 
                 <div class="results-grid">
                     <div class="result-item">
-                        <div class="result-label">Valor Total Mensal</div>
+                        <div class="result-label">Valor total mensal</div>
                         <div class="result-value large" id="valor-total">R$ 0,00</div>
                     </div>
 
                     <div class="result-item">
-                        <div class="result-label">Valor por Licença</div>
+                        <div class="result-label">Valor por licença</div>
                         <div class="result-value" id="valor-licenca">R$ 0,00</div>
                     </div>
 
                     <div class="result-item">
-                        <div class="result-label">Usuários Ativos</div>
+                        <div class="result-label">Usuários ativos</div>
                         <div class="result-value" id="usuarios-ativos">0</div>
                     </div>
 
                     <div class="result-item">
-                        <div class="result-label">Custo Total Consultas</div>
+                        <div class="result-label">Custo total consultas</div>
                         <div class="result-value" id="custo-consultas">R$ 0,00</div>
                     </div>
                 </div>
 
                 <div class="breakdown" id="breakdown" style="display: none;">
-                    <div class="breakdown-title">Detalhamento por Serviço</div>
+                    <div class="breakdown-title">Detalhamento por serviço</div>
                     <div id="breakdown-content"></div>
                 </div>
             </div>
@@ -489,9 +575,21 @@
             if (modo === 'sinistralidade') {
                 document.getElementById('sinistralidade-inputs').style.display = 'grid';
                 document.getElementById('consultas-inputs').classList.remove('active');
+                document.getElementById('consultas-info').style.display = 'none';
+                
+                // Esconde campos de consultas nos cards
+                document.querySelectorAll('.consultas-field').forEach(field => {
+                    field.classList.remove('active');
+                });
             } else {
                 document.getElementById('sinistralidade-inputs').style.display = 'none';
                 document.getElementById('consultas-inputs').classList.add('active');
+                document.getElementById('consultas-info').style.display = 'block';
+                
+                // Mostra campos de consultas nos cards selecionados
+                servicosSelecionados.forEach(servicoId => {
+                    document.getElementById(`consultas-${servicoId}`).classList.add('active');
+                });
             }
 
             calcular();
@@ -503,8 +601,16 @@
 
             if (servicosSelecionados.has(area)) {
                 servicosSelecionados.delete(area);
+                // Esconde o campo de consultas se estiver no modo consultas
+                if (modoCalculo === 'consultas') {
+                    document.getElementById(`consultas-${area}`).classList.remove('active');
+                }
             } else {
                 servicosSelecionados.add(area);
+                // Mostra o campo de consultas se estiver no modo consultas
+                if (modoCalculo === 'consultas') {
+                    document.getElementById(`consultas-${area}`).classList.add('active');
+                }
             }
 
             calcular();
@@ -525,7 +631,9 @@
                 return;
             }
 
-            let baseTotal, usuariosAtivos, consultasTotais, lucroPercent;
+            let baseTotal, usuariosAtivos, lucroPercent;
+            let custoTotal = 0;
+            const detalhamento = [];
 
             if (modoCalculo === 'sinistralidade') {
                 baseTotal = parseFloat(document.getElementById('base-total').value) || 0;
@@ -533,34 +641,53 @@
                 lucroPercent = parseFloat(document.getElementById('lucro').value) || 0;
                 
                 usuariosAtivos = Math.round(baseTotal * (sinistralidade / 100));
-                consultasTotais = usuariosAtivos;
+                const consultasPorServico = usuariosAtivos;
+
+                // Calcula custo para cada serviço selecionado
+                servicosSelecionados.forEach(servicoId => {
+                    const servico = servicos[servicoId];
+                    const custoServico = consultasPorServico * servico.valorConsulta;
+                    custoTotal += custoServico;
+
+                    detalhamento.push({
+                        nome: servico.nome,
+                        custo: custoServico,
+                        valor: servico.valorConsulta,
+                        consultas: consultasPorServico
+                    });
+                });
             } else {
+                // Modo por consultas
                 baseTotal = parseFloat(document.getElementById('base-total-consultas').value) || 0;
-                consultasTotais = parseFloat(document.getElementById('num-consultas').value) || 0;
                 lucroPercent = parseFloat(document.getElementById('lucro-consultas').value) || 0;
-                usuariosAtivos = consultasTotais;
+                
+                let totalConsultas = 0;
+
+                // Calcula custo para cada serviço com base nas consultas individuais
+                servicosSelecionados.forEach(servicoId => {
+                    const servico = servicos[servicoId];
+                    const inputConsultas = document.querySelector(`#consultas-${servicoId} input`);
+                    const consultasServico = parseFloat(inputConsultas.value) || 0;
+                    const custoServico = consultasServico * servico.valorConsulta;
+                    
+                    custoTotal += custoServico;
+                    totalConsultas += consultasServico;
+
+                    detalhamento.push({
+                        nome: servico.nome,
+                        custo: custoServico,
+                        valor: servico.valorConsulta,
+                        consultas: consultasServico
+                    });
+                });
+
+                usuariosAtivos = totalConsultas;
             }
 
             if (baseTotal === 0) {
                 zerarResultados();
                 return;
             }
-
-            // Calcula custo total por serviço
-            let custoTotal = 0;
-            const detalhamento = [];
-
-            servicosSelecionados.forEach(servicoId => {
-                const servico = servicos[servicoId];
-                const custoServico = consultasTotais * servico.valorConsulta;
-                custoTotal += custoServico;
-
-                detalhamento.push({
-                    nome: servico.nome,
-                    custo: custoServico,
-                    valor: servico.valorConsulta
-                });
-            });
 
             // Aplica margem de lucro
             const valorTotal = custoTotal * (1 + (lucroPercent / 100));
@@ -577,7 +704,7 @@
                 document.getElementById('breakdown').style.display = 'block';
                 const breakdownHTML = detalhamento.map(item => `
                     <div class="breakdown-item">
-                        <span>${item.nome} (${formatarMoeda(item.valor)}/consulta)</span>
+                        <span>${item.nome} (${item.consultas} consultas × ${formatarMoeda(item.valor)})</span>
                         <span><strong>${formatarMoeda(item.custo)}</strong></span>
                     </div>
                 `).join('');
