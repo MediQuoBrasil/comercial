@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Planos Comerciais</title>
+    <title>Calculadora de planos comerciais</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -391,13 +391,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Calculadora de Planos Comerciais</h1>
+            <h1>Calculadora de planos comerciais</h1>
             <p>Calcule valores baseados em sinistralidade e expectativa de lucro</p>
         </div>
 
         <div class="main-card">
             <div class="info-box">
-                <strong>❗ Observaçoes:</strong> Essa calculadora foi pensada para um formato B2B, no qual empresas pagam pelo total da base de colaboradores, mas apenas uma porcentagem (sinistralidade) utiliza efetivamente os serviços. O valor é calculado considerando uso real + margem de lucro desejada em lógica PRESUMIDA (bruto). Para margem de lucro em lógica REAL (líquido), é necessário verificar as alíquota atuais com o Adalberto ou Janaina.
+                <strong>❗ Observaçoes:</strong> essa calculadora foi pensada para um formato B2B, no qual empresas pagam pelo total da base de colaboradores, mas apenas uma porcentagem (sinistralidade) utiliza efetivamente os serviços. O valor é calculado considerando uso real + margem de lucro desejada em lógica PRESUMIDA (bruto). Para margem de lucro em lógica REAL (líquido), é necessário verificar as alíquota atuais com o Adalberto ou Janaina.
             </div>
 
             <!-- Modo de Cálculo -->
@@ -405,10 +405,10 @@
             <div class="toggle-mode">
                 <div class="toggle-buttons">
                     <button class="toggle-btn active" onclick="setMode('sinistralidade')">
-                        📊 Por Sinistralidade
+                        Por sinistralidade
                     </button>
                     <button class="toggle-btn" onclick="setMode('consultas')">
-                        📋 Por Número de Consultas
+                        Por consultas mensais
                     </button>
                 </div>
             </div>
@@ -443,7 +443,7 @@
                 </div>
 
                 <div class="info-box consultas-input" id="consultas-info" style="display: none;">
-                    <strong>Modo por consultas mensais:</strong> Defina o número esperado de consultas mensais para cada serviço selecionado diretamente nos cards abaixo.
+                    <strong>Modo por consultas mensais:</strong> defina o número esperado de consultas mensais para cada serviço selecionado diretamente nos cards abaixo.
                 </div>
             </div>
 
@@ -468,7 +468,7 @@
 
                 <div class="area-card" onclick="toggleArea('educacao')">
                     <div class="area-header">
-                        <span class="area-name">Educação Física</span>
+                        <span class="area-name">Educação física</span>
                         <div class="checkbox"></div>
                     </div>
                     <div class="area-info">
@@ -518,7 +518,7 @@
             <!-- Resultados -->
             <div class="results-section">
                 <div class="section-title" style="color: white; margin-bottom: 0;">
-                    Resultados do Cálculo
+                    Resultados do cálculo
                 </div>
 
                 <div class="results-grid">
@@ -557,7 +557,7 @@
 
         const servicos = {
             psicologia: { nome: 'Psicologia', valorConsulta: 15.00 },
-            educacao: { nome: 'Educação Física', valorConsulta: 10.00 },
+            educacao: { nome: 'Educação física', valorConsulta: 10.00 },
             nutricao: { nome: 'Nutrição', valorConsulta: 15.00 },
             dermatologia: { nome: 'Dermatologia', valorConsulta: 19.16 }
         };
